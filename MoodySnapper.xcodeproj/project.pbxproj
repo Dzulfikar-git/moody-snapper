@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		262108A82A12648F003D7B3A /* PhotoFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262108A72A12648F003D7B3A /* PhotoFrameView.swift */; };
 		2632E3EF2A10C65D0004D824 /* MoodySnapperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E3EE2A10C65D0004D824 /* MoodySnapperApp.swift */; };
 		2632E3F32A10C65E0004D824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2632E3F22A10C65E0004D824 /* Assets.xcassets */; };
 		2632E3F62A10C65E0004D824 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2632E3F52A10C65E0004D824 /* Preview Assets.xcassets */; };
@@ -26,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		262108A72A12648F003D7B3A /* PhotoFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFrameView.swift; sourceTree = "<group>"; };
+		262108A92A126CB9003D7B3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2632E3EB2A10C65D0004D824 /* MoodySnapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoodySnapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2632E3EE2A10C65D0004D824 /* MoodySnapperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodySnapperApp.swift; sourceTree = "<group>"; };
 		2632E3F22A10C65E0004D824 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,6 +78,7 @@
 		2632E3ED2A10C65D0004D824 /* MoodySnapper */ = {
 			isa = PBXGroup;
 			children = (
+				262108A92A126CB9003D7B3A /* Info.plist */,
 				2632E3FC2A10C8C30004D824 /* Sources */,
 				2632E3EE2A10C65D0004D824 /* MoodySnapperApp.swift */,
 				2632E3F22A10C65E0004D824 /* Assets.xcassets */,
@@ -127,6 +131,7 @@
 		2632E4002A10C92B0004D824 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				262108A72A12648F003D7B3A /* PhotoFrameView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				2632E4202A10D7CC0004D824 /* DailySnaps.xcdatamodeld in Sources */,
 				2632E4352A10FBE60004D824 /* AnalyzedImageView.swift in Sources */,
 				2632E4232A10D9500004D824 /* PersistenceController.swift in Sources */,
+				262108A82A12648F003D7B3A /* PhotoFrameView.swift in Sources */,
 				2632E42D2A10ECB80004D824 /* UIImage.swift in Sources */,
 				2632E3EF2A10C65D0004D824 /* MoodySnapperApp.swift in Sources */,
 				2632E4312A10F57A0004D824 /* PlaceholderView.swift in Sources */,
@@ -414,12 +420,14 @@
 				DEVELOPMENT_TEAM = 2W2FLHT9EF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MoodySnapper/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera in order to track your mood";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -444,12 +452,14 @@
 				DEVELOPMENT_TEAM = 2W2FLHT9EF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MoodySnapper/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera in order to track your mood";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
