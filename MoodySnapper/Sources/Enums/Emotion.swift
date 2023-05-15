@@ -15,4 +15,7 @@ enum Emotion: String {
     case DISGUST = "Disgust"
     case FEAR = "Fear"
     case SAD = "Sad"
+    
+    
 }
+

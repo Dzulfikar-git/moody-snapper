@@ -39,11 +39,10 @@ struct FaceDetectionUtil {
             let faceRect = VNImageRectForNormalizedRect(boundingBox, Int(imageSize.width), Int(imageSize.height))
             
             // Perform the actual cropping
-            if let croppedImage = cgImage.cropping(to: faceRect) {
+            if let croppedImage: CGImage = cgImage.cropping(to: faceRect) {
                 // Create a new UIImage with the cropped CGImage
                 let resizedImage = UIImage(cgImage: croppedImage).resize(to: faceCropSize)
                 // Return the cropped and resized image
-                // You may want to further process or handle the image as per your requirements
                 completion(resizedImage)
             } else {
                 completion(nil)
