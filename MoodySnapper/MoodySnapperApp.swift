@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct MoodySnapperApp: App {
+    let persistenceController = PersistenceController.shared
+    @Environment(\.scenePhase) var scenePhase
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-        }
+            MainView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+        }.onChange(of: scenePhase, perform: { _ in
+            persistenceController.save()
+        })
     }
 }

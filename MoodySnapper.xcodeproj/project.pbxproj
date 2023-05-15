@@ -8,17 +8,41 @@
 
 /* Begin PBXBuildFile section */
 		2632E3EF2A10C65D0004D824 /* MoodySnapperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E3EE2A10C65D0004D824 /* MoodySnapperApp.swift */; };
-		2632E3F12A10C65D0004D824 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E3F02A10C65D0004D824 /* ContentView.swift */; };
 		2632E3F32A10C65E0004D824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2632E3F22A10C65E0004D824 /* Assets.xcassets */; };
 		2632E3F62A10C65E0004D824 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2632E3F52A10C65E0004D824 /* Preview Assets.xcassets */; };
+		2632E4052A10C9D50004D824 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4042A10C9D50004D824 /* HomeView.swift */; };
+		2632E40A2A10CAA70004D824 /* CNNEmotions.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4092A10CAA70004D824 /* CNNEmotions.mlmodel */; };
+		2632E40C2A10CC450004D824 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E40B2A10CC450004D824 /* HomeStore.swift */; };
+		2632E4202A10D7CC0004D824 /* DailySnaps.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2632E41E2A10D7CC0004D824 /* DailySnaps.xcdatamodeld */; };
+		2632E4232A10D9500004D824 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4222A10D9500004D824 /* PersistenceController.swift */; };
+		2632E4292A10E3AE0004D824 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4282A10E3AE0004D824 /* ImageUtil.swift */; };
+		2632E42D2A10ECB80004D824 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E42C2A10ECB80004D824 /* UIImage.swift */; };
+		2632E42F2A10ECE30004D824 /* FaceDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E42E2A10ECE30004D824 /* FaceDetectionUtil.swift */; };
+		2632E4312A10F57A0004D824 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4302A10F57A0004D824 /* PlaceholderView.swift */; };
+		2632E4332A10F6530004D824 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4322A10F6530004D824 /* MainView.swift */; };
+		2632E4352A10FBE60004D824 /* AnalyzedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4342A10FBE60004D824 /* AnalyzedImageView.swift */; };
+		2632E4372A10FC040004D824 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4362A10FC040004D824 /* Emotion.swift */; };
+		2632E43B2A10FE810004D824 /* ScreenRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E43A2A10FE810004D824 /* ScreenRouting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2632E3EB2A10C65D0004D824 /* MoodySnapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoodySnapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2632E3EE2A10C65D0004D824 /* MoodySnapperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodySnapperApp.swift; sourceTree = "<group>"; };
-		2632E3F02A10C65D0004D824 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2632E3F22A10C65E0004D824 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2632E3F52A10C65E0004D824 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2632E4042A10C9D50004D824 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		2632E4092A10CAA70004D824 /* CNNEmotions.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CNNEmotions.mlmodel; sourceTree = "<group>"; };
+		2632E40B2A10CC450004D824 /* HomeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
+		2632E41F2A10D7CC0004D824 /* DailySnaps.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DailySnaps.xcdatamodel; sourceTree = "<group>"; };
+		2632E4222A10D9500004D824 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		2632E4282A10E3AE0004D824 /* ImageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
+		2632E42C2A10ECB80004D824 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		2632E42E2A10ECE30004D824 /* FaceDetectionUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionUtil.swift; sourceTree = "<group>"; };
+		2632E4302A10F57A0004D824 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		2632E4322A10F6530004D824 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		2632E4342A10FBE60004D824 /* AnalyzedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzedImageView.swift; sourceTree = "<group>"; };
+		2632E4362A10FC040004D824 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
+		2632E43A2A10FE810004D824 /* ScreenRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenRouting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +75,8 @@
 		2632E3ED2A10C65D0004D824 /* MoodySnapper */ = {
 			isa = PBXGroup;
 			children = (
+				2632E3FC2A10C8C30004D824 /* Sources */,
 				2632E3EE2A10C65D0004D824 /* MoodySnapperApp.swift */,
-				2632E3F02A10C65D0004D824 /* ContentView.swift */,
 				2632E3F22A10C65E0004D824 /* Assets.xcassets */,
 				2632E3F42A10C65E0004D824 /* Preview Content */,
 			);
@@ -65,6 +89,114 @@
 				2632E3F52A10C65E0004D824 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2632E3FC2A10C8C30004D824 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2632E4382A10FC080004D824 /* Enums */,
+				2632E4272A10E3A00004D824 /* Utils */,
+				2632E4242A10E1800004D824 /* Extensions */,
+				2632E4212A10D93C0004D824 /* Configs */,
+				2632E4022A10C97E0004D824 /* Models */,
+				2632E3FF2A10C9150004D824 /* Stores */,
+				2632E3FE2A10C90F0004D824 /* Views */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		2632E3FE2A10C90F0004D824 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2632E4012A10C9320004D824 /* Screens */,
+				2632E4002A10C92B0004D824 /* Shared */,
+				2632E43A2A10FE810004D824 /* ScreenRouting.swift */,
+				2632E4322A10F6530004D824 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2632E3FF2A10C9150004D824 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				2632E40B2A10CC450004D824 /* HomeStore.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		2632E4002A10C92B0004D824 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		2632E4012A10C9320004D824 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				2632E4042A10C9D50004D824 /* HomeView.swift */,
+				2632E4302A10F57A0004D824 /* PlaceholderView.swift */,
+				2632E4342A10FBE60004D824 /* AnalyzedImageView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		2632E4022A10C97E0004D824 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2632E4062A10CA120004D824 /* MachineLearning */,
+				2632E4032A10C9850004D824 /* CoreData */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2632E4032A10C9850004D824 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2632E41E2A10D7CC0004D824 /* DailySnaps.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		2632E4062A10CA120004D824 /* MachineLearning */ = {
+			isa = PBXGroup;
+			children = (
+				2632E4092A10CAA70004D824 /* CNNEmotions.mlmodel */,
+			);
+			path = MachineLearning;
+			sourceTree = "<group>";
+		};
+		2632E4212A10D93C0004D824 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				2632E4222A10D9500004D824 /* PersistenceController.swift */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
+		2632E4242A10E1800004D824 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2632E42C2A10ECB80004D824 /* UIImage.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2632E4272A10E3A00004D824 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2632E4282A10E3AE0004D824 /* ImageUtil.swift */,
+				2632E42E2A10ECE30004D824 /* FaceDetectionUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2632E4382A10FC080004D824 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				2632E4362A10FC040004D824 /* Emotion.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +269,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2632E3F12A10C65D0004D824 /* ContentView.swift in Sources */,
+				2632E42F2A10ECE30004D824 /* FaceDetectionUtil.swift in Sources */,
+				2632E4332A10F6530004D824 /* MainView.swift in Sources */,
+				2632E40C2A10CC450004D824 /* HomeStore.swift in Sources */,
+				2632E4292A10E3AE0004D824 /* ImageUtil.swift in Sources */,
+				2632E40A2A10CAA70004D824 /* CNNEmotions.mlmodel in Sources */,
+				2632E4202A10D7CC0004D824 /* DailySnaps.xcdatamodeld in Sources */,
+				2632E4352A10FBE60004D824 /* AnalyzedImageView.swift in Sources */,
+				2632E4232A10D9500004D824 /* PersistenceController.swift in Sources */,
+				2632E42D2A10ECB80004D824 /* UIImage.swift in Sources */,
 				2632E3EF2A10C65D0004D824 /* MoodySnapperApp.swift in Sources */,
+				2632E4312A10F57A0004D824 /* PlaceholderView.swift in Sources */,
+				2632E4052A10C9D50004D824 /* HomeView.swift in Sources */,
+				2632E43B2A10FE810004D824 /* ScreenRouting.swift in Sources */,
+				2632E4372A10FC040004D824 /* Emotion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,11 +414,12 @@
 				DEVELOPMENT_TEAM = 2W2FLHT9EF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera in order to track your mood";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -299,11 +444,12 @@
 				DEVELOPMENT_TEAM = 2W2FLHT9EF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera in order to track your mood";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -339,6 +485,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2632E41E2A10D7CC0004D824 /* DailySnaps.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2632E41F2A10D7CC0004D824 /* DailySnaps.xcdatamodel */,
+			);
+			currentVersion = 2632E41F2A10D7CC0004D824 /* DailySnaps.xcdatamodel */;
+			path = DailySnaps.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2632E3E32A10C65D0004D824 /* Project object */;
 }
