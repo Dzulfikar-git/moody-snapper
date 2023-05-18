@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-struct PersistenceController {
-    static let shared = PersistenceController()
+struct DailySnapsPersistenceController {
+    static let shared = DailySnapsPersistenceController()
     
     let container: NSPersistentContainer
     
@@ -26,18 +26,6 @@ struct PersistenceController {
         container.loadPersistentStores { description, error in
             if let error = error {
                 fatalError("Error: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func save() {
-        let context = container.viewContext
-        
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                // show some error here
             }
         }
     }

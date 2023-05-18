@@ -6,42 +6,39 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AnalyzedImageView: View {
+    @EnvironmentObject var analyzedImageStore: AnalyzedImageStore
+    @Environment(\.managedObjectContext) var dailySnapsContext
     var originalPhoto: UIImage
     var croppedPhoto: UIImage
     
-    @State private var emotion: Emotion?
-    @State private var adjustedEmotion: Emotion?
-    @State private var isShowingEmotionActionSheet = false
-    @State private var isPresentingAddImageSheet = false
-    @State private var comment: String = ""
-    
     var body: some View {
         VStack {
-            if emotion == nil {
+            if analyzedImageStore.emotion == nil {
                 ProgressView()
             } else {
-                PhotoFrameView(photo: originalPhoto, emotion: emotion!, adjustedEmotion: $adjustedEmotion)
+                PhotoFrameView(photo: originalPhoto, emotion: analyzedImageStore.emotion!, adjustedEmotion: $analyzedImageStore.adjustedEmotion)
                     .padding(16.0)
                 Spacer()
                 
                 HStack {
                     Button {
                         // handle change emotion value.
-                        isShowingEmotionActionSheet = true
+                        analyzedImageStore.isShowingEmotionActionSheet = true
                     } label: {
-                        Text("Not \(adjustedEmotion != nil ? adjustedEmotion!.rawValue : emotion!.rawValue)  ?")
+                        Text("Not \(analyzedImageStore.adjustedEmotion != nil ? analyzedImageStore.adjustedEmotion!.rawValue : analyzedImageStore.emotion!.rawValue)  ?")
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, maxHeight: 40)
                     }
                     .background(Color.red)
                     .clipShape(RoundedRectangle(cornerRadius: 5.0))
                     .clipped()
-                    .confirmationDialog("Select Your Emotion!", isPresented: $isShowingEmotionActionSheet, titleVisibility: .visible) {
+                    .confirmationDialog("Select Your Emotion!", isPresented: $analyzedImageStore.isShowingEmotionActionSheet, titleVisibility: .visible) {
                         ForEach(Emotion.allCases, id: \.self) { emotionData in
                             Button(emotionData.rawValue) {
-                                adjustedEmotion = emotionData
+                                analyzedImageStore.adjustedEmotion = emotionData
                             }
                         }
                     }
@@ -49,7 +46,7 @@ struct AnalyzedImageView: View {
                     Spacer()
                     
                     Button {
-                        isPresentingAddImageSheet = true
+                        analyzedImageStore.isPresentingAddImageSheet = true
                     } label: {
                         Text("Add")
                             .foregroundColor(.white)
@@ -58,29 +55,26 @@ struct AnalyzedImageView: View {
                     .background(Color.blue)
                     .clipShape(RoundedRectangle(cornerRadius: 5.0))
                     .clipped()
-                    .sheet(isPresented: $isPresentingAddImageSheet, content: {
-                        VStack {
-                            HStack {
-                                Button {
-                                    isPresentingAddImageSheet = false
-                                } label: {
-                                    Text("Cancel")
-                                }
-                                
-                                Spacer()
-                                
-                                Button {
-                                    isPresentingAddImageSheet = false
-                                    //TODO: Handle save data.
-                                } label: {
-                                    Text("Save")
-                                }
+                    .sheet(isPresented: $analyzedImageStore.isPresentingAddImageSheet, content: {
+                        AnalyzedImageSheetView(isPresentingSheet: $analyzedImageStore.isPresentingAddImageSheet, comment: $analyzedImageStore.comment, onSaveClicked: {
+                            // handle save.
+                            // 1. check if today DailySnaps has been created
+                            var todayDailySnap: DailySnaps? = analyzedImageStore.getTodayDailySnap(managedContext: dailySnapsContext)
+                            
+                            if todayDailySnap == nil {
+                                todayDailySnap = analyzedImageStore.createTodayDailySnap(managedContext: dailySnapsContext)
                             }
                             
-                            TextEditor(text: $comment)
-                        }
-                        .presentationDetents([.medium])
-                        .presentationDragIndicator(.hidden)
+                            // 2. then create the daily snap items.
+                            
+                            analyzedImageStore.createDailySnapItems(photo: originalPhoto, dailySnap: todayDailySnap!, moodStatus: analyzedImageStore.adjustedEmotion == nil ? analyzedImageStore.emotion! : analyzedImageStore.adjustedEmotion!, managedContext: dailySnapsContext)
+                            
+                            print("ALREADY CREATED")
+                        }, onCancelClicked: {
+                            analyzedImageStore.isPresentingAddImageSheet = false
+                            // reset the comment
+                            analyzedImageStore.comment = ""
+                        })
                     })
                 }.padding([.horizontal], 16.0)
             }
@@ -88,23 +82,25 @@ struct AnalyzedImageView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
             Task {
-                analyzeEmotion()
+                analyzedImageStore.analyzeEmotion(photo: croppedPhoto)
             }
         }
-    }
-    
-    private func analyzeEmotion() {
-        let model = try? CNNEmotions(configuration: .init())
-        guard let predictEmotion = try? model?.prediction(data: ImageUtil.buffer(from: croppedPhoto)!) else {
-            fatalError("Unexpected Runtime Error")
+        .onDisappear {
+            Task {
+                analyzedImageStore.adjustedEmotion = nil
+            }
         }
-        
-        emotion = Emotion(rawValue: predictEmotion.classLabel)
     }
 }
 
 struct AnalyzedImageView_Previews: PreviewProvider {
+    struct AnalyzedImageViewPreviewer: View {
+        var body: some View {
+            AnalyzedImageView(originalPhoto: UIImage(named: "PlaceholderPhoto")!, croppedPhoto:  UIImage(named: "PlaceholderPhoto")! ).environmentObject(AnalyzedImageStore.shared)
+        }
+    }
+    
     static var previews: some View {
-        AnalyzedImageView(originalPhoto: UIImage(systemName: "PlaceholderPhoto")!, croppedPhoto: UIImage(systemName: "PlaceholderPhoto")!)
+        AnalyzedImageViewPreviewer()
     }
 }

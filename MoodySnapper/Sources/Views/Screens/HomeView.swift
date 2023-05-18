@@ -7,15 +7,18 @@
 
 import SwiftUI
 import PhotosUI
+import CoreData
 
 struct HomeView: View {
+    @StateObject var analyzedImageStore: AnalyzedImageStore = .shared
+    @Environment(\.managedObjectContext) var dailySnapsContext
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DailySnaps.date, ascending: false)]) private var dailySnaps: FetchedResults<DailySnaps>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DailySnapItems.created_at, ascending: false)]) private var dailySnapItems: FetchedResults<DailySnapItems>
+    
     @Binding var navigationPath: NavigationPath
-    
     @State var selectedPhoto: PhotosPickerItem?
-    
     @State var isProcessingImage: Bool = false
     @State var isShowingImageAlert: Bool = false
-    
     @State private var selectedOriginalPhoto: UIImage?
     @State private var croppedOriginalPhoto: UIImage?
     
@@ -25,6 +28,16 @@ struct HomeView: View {
             
             if isProcessingImage {
                 Text("Image is loading, please wait...")
+            }
+            
+        }
+        .onAppear {
+            Task {
+                for dailySnap in dailySnaps  {
+                    if let snapItems = dailySnap.dailysnapitems {
+                        for
+                    }
+                }
             }
         }
         .onChange(of: selectedPhoto, perform: { _ in
@@ -40,6 +53,8 @@ struct HomeView: View {
         .navigationDestination(for: AnalyzedImageViewRoutingPath.self, destination: { _ in
             if (selectedOriginalPhoto != nil) && (croppedOriginalPhoto != nil) {
                 AnalyzedImageView(originalPhoto: selectedOriginalPhoto!, croppedPhoto: croppedOriginalPhoto!)
+                    .environmentObject(analyzedImageStore)
+                    .environment(\.managedObjectContext, dailySnapsContext)
             }
         })
     }

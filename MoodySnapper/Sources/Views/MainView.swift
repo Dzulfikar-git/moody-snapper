@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct MainView: View {
-    @State var navigationPath: NavigationPath = .init()
+    @State private var navigationPath: NavigationPath = .init()
+    private let dailySnapsPersistenceController: DailySnapsPersistenceController = .shared
     var body: some View {
         NavigationStack(path: $navigationPath) {
             TabView {
                 HomeView(navigationPath: $navigationPath)
+                    .environment(\.managedObjectContext, dailySnapsPersistenceController.container.viewContext)
                     .tabItem {
                         Label("Me", systemImage: "person.circle.fill")
                     }

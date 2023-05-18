@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		262108A82A12648F003D7B3A /* PhotoFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262108A72A12648F003D7B3A /* PhotoFrameView.swift */; };
+		262108AB2A131AC4003D7B3A /* AnalyzedImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262108AA2A131AC4003D7B3A /* AnalyzedImageStore.swift */; };
+		262108AD2A134D2B003D7B3A /* AnalyzeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262108AC2A134D2B003D7B3A /* AnalyzeError.swift */; };
 		2632E3EF2A10C65D0004D824 /* MoodySnapperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E3EE2A10C65D0004D824 /* MoodySnapperApp.swift */; };
 		2632E3F32A10C65E0004D824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2632E3F22A10C65E0004D824 /* Assets.xcassets */; };
 		2632E3F62A10C65E0004D824 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2632E3F52A10C65E0004D824 /* Preview Assets.xcassets */; };
@@ -15,7 +17,7 @@
 		2632E40A2A10CAA70004D824 /* CNNEmotions.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4092A10CAA70004D824 /* CNNEmotions.mlmodel */; };
 		2632E40C2A10CC450004D824 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E40B2A10CC450004D824 /* HomeStore.swift */; };
 		2632E4202A10D7CC0004D824 /* DailySnaps.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2632E41E2A10D7CC0004D824 /* DailySnaps.xcdatamodeld */; };
-		2632E4232A10D9500004D824 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4222A10D9500004D824 /* PersistenceController.swift */; };
+		2632E4232A10D9500004D824 /* DailySnapsPersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4222A10D9500004D824 /* DailySnapsPersistenceController.swift */; };
 		2632E4292A10E3AE0004D824 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4282A10E3AE0004D824 /* ImageUtil.swift */; };
 		2632E42D2A10ECB80004D824 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E42C2A10ECB80004D824 /* UIImage.swift */; };
 		2632E42F2A10ECE30004D824 /* FaceDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E42E2A10ECE30004D824 /* FaceDetectionUtil.swift */; };
@@ -24,11 +26,14 @@
 		2632E4352A10FBE60004D824 /* AnalyzedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4342A10FBE60004D824 /* AnalyzedImageView.swift */; };
 		2632E4372A10FC040004D824 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E4362A10FC040004D824 /* Emotion.swift */; };
 		2632E43B2A10FE810004D824 /* ScreenRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632E43A2A10FE810004D824 /* ScreenRouting.swift */; };
+		26B78D152A147B5C0060F507 /* AnalyzedImageSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B78D142A147B5C0060F507 /* AnalyzedImageSheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		262108A72A12648F003D7B3A /* PhotoFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFrameView.swift; sourceTree = "<group>"; };
 		262108A92A126CB9003D7B3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		262108AA2A131AC4003D7B3A /* AnalyzedImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzedImageStore.swift; sourceTree = "<group>"; };
+		262108AC2A134D2B003D7B3A /* AnalyzeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeError.swift; sourceTree = "<group>"; };
 		2632E3EB2A10C65D0004D824 /* MoodySnapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoodySnapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2632E3EE2A10C65D0004D824 /* MoodySnapperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodySnapperApp.swift; sourceTree = "<group>"; };
 		2632E3F22A10C65E0004D824 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -37,7 +42,7 @@
 		2632E4092A10CAA70004D824 /* CNNEmotions.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CNNEmotions.mlmodel; sourceTree = "<group>"; };
 		2632E40B2A10CC450004D824 /* HomeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
 		2632E41F2A10D7CC0004D824 /* DailySnaps.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DailySnaps.xcdatamodel; sourceTree = "<group>"; };
-		2632E4222A10D9500004D824 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		2632E4222A10D9500004D824 /* DailySnapsPersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySnapsPersistenceController.swift; sourceTree = "<group>"; };
 		2632E4282A10E3AE0004D824 /* ImageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
 		2632E42C2A10ECB80004D824 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		2632E42E2A10ECE30004D824 /* FaceDetectionUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionUtil.swift; sourceTree = "<group>"; };
@@ -46,6 +51,7 @@
 		2632E4342A10FBE60004D824 /* AnalyzedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzedImageView.swift; sourceTree = "<group>"; };
 		2632E4362A10FC040004D824 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
 		2632E43A2A10FE810004D824 /* ScreenRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenRouting.swift; sourceTree = "<group>"; };
+		26B78D142A147B5C0060F507 /* AnalyzedImageSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzedImageSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				2632E40B2A10CC450004D824 /* HomeStore.swift */,
+				262108AA2A131AC4003D7B3A /* AnalyzedImageStore.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -132,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				262108A72A12648F003D7B3A /* PhotoFrameView.swift */,
+				26B78D142A147B5C0060F507 /* AnalyzedImageSheetView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -158,6 +166,7 @@
 		2632E4032A10C9850004D824 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				2632E4222A10D9500004D824 /* DailySnapsPersistenceController.swift */,
 				2632E41E2A10D7CC0004D824 /* DailySnaps.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -174,7 +183,6 @@
 		2632E4212A10D93C0004D824 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				2632E4222A10D9500004D824 /* PersistenceController.swift */,
 			);
 			path = Configs;
 			sourceTree = "<group>";
@@ -200,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				2632E4362A10FC040004D824 /* Emotion.swift */,
+				262108AC2A134D2B003D7B3A /* AnalyzeError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -280,11 +289,14 @@
 				2632E4292A10E3AE0004D824 /* ImageUtil.swift in Sources */,
 				2632E40A2A10CAA70004D824 /* CNNEmotions.mlmodel in Sources */,
 				2632E4202A10D7CC0004D824 /* DailySnaps.xcdatamodeld in Sources */,
+				26B78D152A147B5C0060F507 /* AnalyzedImageSheetView.swift in Sources */,
+				262108AD2A134D2B003D7B3A /* AnalyzeError.swift in Sources */,
 				2632E4352A10FBE60004D824 /* AnalyzedImageView.swift in Sources */,
-				2632E4232A10D9500004D824 /* PersistenceController.swift in Sources */,
+				2632E4232A10D9500004D824 /* DailySnapsPersistenceController.swift in Sources */,
 				262108A82A12648F003D7B3A /* PhotoFrameView.swift in Sources */,
 				2632E42D2A10ECB80004D824 /* UIImage.swift in Sources */,
 				2632E3EF2A10C65D0004D824 /* MoodySnapperApp.swift in Sources */,
+				262108AB2A131AC4003D7B3A /* AnalyzedImageStore.swift in Sources */,
 				2632E4312A10F57A0004D824 /* PlaceholderView.swift in Sources */,
 				2632E4052A10C9D50004D824 /* HomeView.swift in Sources */,
 				2632E43B2A10FE810004D824 /* ScreenRouting.swift in Sources */,
