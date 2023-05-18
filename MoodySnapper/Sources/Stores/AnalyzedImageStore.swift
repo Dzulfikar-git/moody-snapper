@@ -31,8 +31,8 @@ class AnalyzedImageStore: ObservableObject {
         let entityDescription = NSEntityDescription.entity(forEntityName: "DailySnaps", in: managedContext)
         let request: NSFetchRequest<DailySnaps> = DailySnaps.fetchRequest()
         request.entity = entityDescription
-        let todayDate = Calendar.current.startOfDay(for: .now)
-        let pred = NSPredicate(format: "(date = %@)", todayDate as NSDate)
+        let todayDate = Date().formatted(date: .numeric, time: .omitted)
+        let pred = NSPredicate(format: "(date = %@)", todayDate)
         request.predicate = pred
         
         do {

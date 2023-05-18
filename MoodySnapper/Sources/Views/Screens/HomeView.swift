@@ -22,22 +22,26 @@ struct HomeView: View {
     @State private var selectedOriginalPhoto: UIImage?
     @State private var croppedOriginalPhoto: UIImage?
     
+    init(navigationPath: Binding<NavigationPath>) {
+        _navigationPath = navigationPath
+        _dailySnaps = FetchRequest<DailySnaps>(sortDescriptors: [], predicate: NSPredicate(format: "(date = %@)", Date().formatted(date: .numeric, time: .omitted)))
+    }
+    
     var body: some View {
         VStack {
+            
+            
             PhotosPicker("Select Your Photo", selection: $selectedPhoto, matching: .images)
             
             if isProcessingImage {
                 Text("Image is loading, please wait...")
             }
             
+            
         }
         .onAppear {
             Task {
-                for dailySnap in dailySnaps  {
-                    if let snapItems = dailySnap.dailysnapitems {
-                        for
-                    }
-                }
+                print(dailySnaps)
             }
         }
         .onChange(of: selectedPhoto, perform: { _ in
