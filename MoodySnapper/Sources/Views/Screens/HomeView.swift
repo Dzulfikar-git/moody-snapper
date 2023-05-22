@@ -8,12 +8,12 @@
 import SwiftUI
 import PhotosUI
 import CoreData
+import SceneKit
 
 struct HomeView: View {
+    @EnvironmentObject var homeStore: HomeStore
     @StateObject var analyzedImageStore: AnalyzedImageStore = .shared
     @Environment(\.managedObjectContext) var dailySnapsContext
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DailySnaps.date, ascending: false)]) private var dailySnaps: FetchedResults<DailySnaps>
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DailySnapItems.created_at, ascending: false)]) private var dailySnapItems: FetchedResults<DailySnapItems>
     
     @Binding var navigationPath: NavigationPath
     @State var selectedPhoto: PhotosPickerItem?
@@ -21,32 +21,69 @@ struct HomeView: View {
     @State var isShowingImageAlert: Bool = false
     @State private var selectedOriginalPhoto: UIImage?
     @State private var croppedOriginalPhoto: UIImage?
-    
-    init(navigationPath: Binding<NavigationPath>) {
-        _navigationPath = navigationPath
-        _dailySnaps = FetchRequest<DailySnaps>(sortDescriptors: [], predicate: NSPredicate(format: "(date = %@)", Date().formatted(date: .numeric, time: .omitted)))
-    }
+    @State private var currentMood: Emotion = Emotion.NEUTRAL
+    @State private var pickedDate: Date = .now
+    @State private var dailySnapItems: [DailySnapItems] = []
     
     var body: some View {
-        VStack {
-            
-            
-            PhotosPicker("Select Your Photo", selection: $selectedPhoto, matching: .images)
-            
+        VStack(spacing: 0) {
+            HStack(alignment: .center) {
+                
+                DatePicker(selection: $pickedDate, displayedComponents: .date, label: {
+                })
+                .frame(maxWidth: 100)
+                
+                Spacer()
+                
+                PhotosPicker(selection: $selectedPhoto, matching: .images, label: {
+                    Image(systemName: "photo.circle.fill")
+                })
+            }
+            if homeStore.todayDailySnap == nil {
+                Text("Go Snap Your Mood!")
+                SceneView(scene: SCNScene(named: "Fox_Sit2_Idle.scn"), options: [.autoenablesDefaultLighting])
+                    .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height / 2)
+            } else {
+                Text("Your Mood is \(currentMood.rawValue)")
+                let todayDailySnap = homeStore.todayDailySnap!
+                SceneView(scene: SCNScene(named: EmotionScene.animation(emotion: currentMood)), options: [.autoenablesDefaultLighting])
+                    .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height / 2)
+                
+                ScrollView {
+                    ForEach(dailySnapItems, id: \.id) { snapItem in
+                        DailySnapItemRowView(dailySnapItem: snapItem)
+                            .onTapGesture {
+                                navigationPath.append(DetailDailySnapItemRoutingPath(snapItem: snapItem))
+                            }
+                    }
+                }
+            }
             if isProcessingImage {
                 Text("Image is loading, please wait...")
             }
-            
-            
         }
         .onAppear {
             Task {
-                print(dailySnaps)
+                
+                homeStore.todayDailySnap = homeStore.getTodayDailySnap()
+                if homeStore.todayDailySnap != nil {
+                    self.dailySnapItems = homeStore.getDailySnapItemsByDailySnap(dailySnap: homeStore.todayDailySnap!)
+                    self.currentMood = Emotion.init(rawValue: homeStore.todayDailySnap!.latest_mood!).unsafelyUnwrapped
+                }
             }
         }
         .onChange(of: selectedPhoto, perform: { _ in
             Task {
                 await processPickerPhoto()
+            }
+        })
+        .onChange(of: pickedDate, perform: { _ in
+            Task {
+                homeStore.todayDailySnap = homeStore.getDailySnapByDate(filterDate: pickedDate.formatted(date: .numeric, time: .omitted))
+                if homeStore.todayDailySnap != nil {
+                    self.dailySnapItems = homeStore.getDailySnapItemsByDailySnap(dailySnap: homeStore.todayDailySnap!)
+                    self.currentMood = Emotion.init(rawValue: homeStore.todayDailySnap!.latest_mood!).unsafelyUnwrapped
+                }
             }
         })
         .alert("Photo Error", isPresented: $isShowingImageAlert, actions: {
@@ -56,10 +93,16 @@ struct HomeView: View {
         })
         .navigationDestination(for: AnalyzedImageViewRoutingPath.self, destination: { _ in
             if (selectedOriginalPhoto != nil) && (croppedOriginalPhoto != nil) {
-                AnalyzedImageView(originalPhoto: selectedOriginalPhoto!, croppedPhoto: croppedOriginalPhoto!)
+                AnalyzedImageView(navigationPath: $navigationPath, originalPhoto: selectedOriginalPhoto!, croppedPhoto: croppedOriginalPhoto!)
                     .environmentObject(analyzedImageStore)
                     .environment(\.managedObjectContext, dailySnapsContext)
+                    .onAppear {
+                        isProcessingImage = false
+                    }
             }
+        })
+        .navigationDestination(for: DetailDailySnapItemRoutingPath.self, destination: { snapItem in
+            DetailDailySnapItemView(dailySnapItem: snapItem.dailySnapItem)
         })
     }
     
@@ -90,12 +133,12 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     struct HomeViewPreviewer: View {
         @State var navigationPath: NavigationPath = .init()
-
+        
         var body: some View {
             HomeView(navigationPath: $navigationPath)
         }
     }
-
+    
     static var previews: some View {
         HomeViewPreviewer()
     }

@@ -12,20 +12,9 @@ struct MainView: View {
     private let dailySnapsPersistenceController: DailySnapsPersistenceController = .shared
     var body: some View {
         NavigationStack(path: $navigationPath) {
-            TabView {
-                HomeView(navigationPath: $navigationPath)
-                    .environment(\.managedObjectContext, dailySnapsPersistenceController.container.viewContext)
-                    .tabItem {
-                        Label("Me", systemImage: "person.circle.fill")
-                    }
-                    .tag(1)
-                
-                PlaceholderView()
-                    .tabItem {
-                        Label("Placeholder", systemImage: "calendar.circle.fill")
-                    }
-                    .tag(2)
-            }
+            HomeView(navigationPath: $navigationPath)
+                .environment(\.managedObjectContext, dailySnapsPersistenceController.container.viewContext)
+                .environmentObject(HomeStore(managedContext: dailySnapsPersistenceController.container.viewContext))
         }
     }
 }

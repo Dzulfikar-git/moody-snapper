@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E261" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="DailySnapItems" representedClassName="DailySnapItems" isAbstract="YES" syncable="YES" codeGenerationType="class">
-        <attribute name="created_at" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DailySnapItems" representedClassName="DailySnapItems" syncable="YES" codeGenerationType="class">
+        <attribute name="created_at" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="image" optional="YES" attributeType="String"/>
-        <attribute name="mood_status" optional="YES" attributeType="String"/>
+        <attribute name="image" attributeType="String"/>
+        <attribute name="mood_status" attributeType="String"/>
+        <attribute name="snap_moment" attributeType="String"/>
         <relationship name="dailysnaps" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailySnaps" inverseName="dailysnapitems" inverseEntity="DailySnaps"/>
     </entity>
-    <entity name="DailySnaps" representedClassName="DailySnaps" isAbstract="YES" syncable="YES" codeGenerationType="class">
+    <entity name="DailySnaps" representedClassName="DailySnaps" syncable="YES" codeGenerationType="class">
         <attribute name="date" attributeType="String"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="latest_mood" optional="YES" attributeType="String"/>
         <relationship name="dailysnapitems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DailySnapItems" inverseName="dailysnaps" inverseEntity="DailySnapItems"/>
     </entity>
 </model>

@@ -67,7 +67,7 @@ class AnalyzedImageStore: ObservableObject {
         }
     }
     
-    public func createDailySnapItems(photo: UIImage, dailySnap: DailySnaps, moodStatus: Emotion, managedContext: NSManagedObjectContext) -> Bool {
+    public func createDailySnapItems(photo: UIImage, snapMoment: String, moodStatus: Emotion, dailySnap: DailySnaps, managedContext: NSManagedObjectContext) -> Bool {
         _ = NSEntityDescription.entity(forEntityName: "DailySnapItems", in: managedContext)!
         
         // savePhotoToDir
@@ -79,6 +79,8 @@ class AnalyzedImageStore: ObservableObject {
         dailySnapItem.created_at = Date()
         dailySnapItem.mood_status = moodStatus.rawValue
         dailySnapItem.image = imageId
+        dailySnapItem.snap_moment = snapMoment
+        dailySnap.latest_mood = moodStatus.rawValue
         
         do {
             try managedContext.save()

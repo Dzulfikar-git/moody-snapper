@@ -11,6 +11,7 @@ import CoreData
 struct AnalyzedImageView: View {
     @EnvironmentObject var analyzedImageStore: AnalyzedImageStore
     @Environment(\.managedObjectContext) var dailySnapsContext
+    @Binding var navigationPath: NavigationPath
     var originalPhoto: UIImage
     var croppedPhoto: UIImage
     
@@ -67,9 +68,12 @@ struct AnalyzedImageView: View {
                             
                             // 2. then create the daily snap items.
                             
-                            analyzedImageStore.createDailySnapItems(photo: originalPhoto, dailySnap: todayDailySnap!, moodStatus: analyzedImageStore.adjustedEmotion == nil ? analyzedImageStore.emotion! : analyzedImageStore.adjustedEmotion!, managedContext: dailySnapsContext)
+                            analyzedImageStore.createDailySnapItems(photo: originalPhoto, snapMoment: analyzedImageStore.comment, moodStatus: analyzedImageStore.adjustedEmotion == nil ? analyzedImageStore.emotion! : analyzedImageStore.adjustedEmotion!, dailySnap: todayDailySnap!, managedContext: dailySnapsContext)
                             
-                            print("ALREADY CREATED")
+                            analyzedImageStore.isPresentingAddImageSheet = false
+                            
+                            analyzedImageStore.comment = ""
+                            navigationPath.removeLast()
                         }, onCancelClicked: {
                             analyzedImageStore.isPresentingAddImageSheet = false
                             // reset the comment
@@ -95,8 +99,9 @@ struct AnalyzedImageView: View {
 
 struct AnalyzedImageView_Previews: PreviewProvider {
     struct AnalyzedImageViewPreviewer: View {
+        @State var navigationPath: NavigationPath = .init()
         var body: some View {
-            AnalyzedImageView(originalPhoto: UIImage(named: "PlaceholderPhoto")!, croppedPhoto:  UIImage(named: "PlaceholderPhoto")! ).environmentObject(AnalyzedImageStore.shared)
+            AnalyzedImageView(navigationPath: $navigationPath, originalPhoto: UIImage(named: "PlaceholderPhoto")!, croppedPhoto:  UIImage(named: "PlaceholderPhoto")! ).environmentObject(AnalyzedImageStore.shared)
         }
     }
     
