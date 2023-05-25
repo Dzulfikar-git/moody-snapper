@@ -171,6 +171,7 @@ struct HomeView: View {
                         navigationPath.append(AnalyzedImageViewRoutingPath())
                     } else {
                         isShowingImageAlert = true
+                        isProcessingImage = false
                     }
                 }
             }
@@ -187,6 +188,7 @@ struct HomeView: View {
                     navigationPath.append(AnalyzedImageViewRoutingPath())
                 } else {
                     isShowingImageAlert = true
+                    isProcessingImage = false
                 }
             }
         }
