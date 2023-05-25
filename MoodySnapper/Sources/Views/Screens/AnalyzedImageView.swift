@@ -71,7 +71,6 @@ struct AnalyzedImageView: View {
                             analyzedImageStore.createDailySnapItems(photo: originalPhoto, snapMoment: analyzedImageStore.comment, moodStatus: analyzedImageStore.adjustedEmotion == nil ? analyzedImageStore.emotion! : analyzedImageStore.adjustedEmotion!, dailySnap: todayDailySnap!, managedContext: dailySnapsContext)
                             
                             analyzedImageStore.isPresentingAddImageSheet = false
-                            
                             analyzedImageStore.comment = ""
                             navigationPath.removeLast()
                         }, onCancelClicked: {
@@ -83,6 +82,7 @@ struct AnalyzedImageView: View {
                 }.padding([.horizontal], 16.0)
             }
         }
+        .background(Color.whiteIvory)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
             Task {

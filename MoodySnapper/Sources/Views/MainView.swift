@@ -13,6 +13,7 @@ struct MainView: View {
     var body: some View {
         NavigationStack(path: $navigationPath) {
             HomeView(navigationPath: $navigationPath)
+                .background(Color.whiteIvory)
                 .environment(\.managedObjectContext, dailySnapsPersistenceController.container.viewContext)
                 .environmentObject(HomeStore(managedContext: dailySnapsPersistenceController.container.viewContext))
         }

@@ -26,6 +26,10 @@ struct AnalyzedImageSheetView: View {
                 Spacer()
                 
                 Button {
+                    if comment.isEmpty {
+                        return
+                    }
+                    
                     onSaveClicked()
                 } label: {
                     Text("Save")
@@ -35,7 +39,7 @@ struct AnalyzedImageSheetView: View {
                 .font(.title3)
                 .fontWeight(.semibold)
             TextEditor(text: $comment)
-                .border(.black, width: 1.0)
+                .border(comment.isEmpty ? .red : .black, width: 1.0)
         }
         .padding([.horizontal], 16.0)
         .presentationDetents([.medium])

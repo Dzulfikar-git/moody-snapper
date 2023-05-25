@@ -12,4 +12,5 @@ extension Color {
     static let primaryColor = Color("PrimaryColor")
     static let successColor = Color("SuccessColor")
     static let warningColor = Color("WarningColor")
+    static let whiteIvory = Color("WhiteIvoryColor")
 }

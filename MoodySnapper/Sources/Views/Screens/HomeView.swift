@@ -24,53 +24,91 @@ struct HomeView: View {
     @State private var currentMood: Emotion = Emotion.NEUTRAL
     @State private var pickedDate: Date = .now
     @State private var dailySnapItems: [DailySnapItems] = []
+    @State private var scnScene: SCNScene = SCNScene(named: "Fox_Sit2_Idle.scn")!
+    @State private var capturedImage: UIImage?
+    @State private var isShowingCamera = false
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack(alignment: .center) {
-                
-                DatePicker(selection: $pickedDate, displayedComponents: .date, label: {
-                })
-                .frame(maxWidth: 100)
-                
-                Spacer()
-                
-                PhotosPicker(selection: $selectedPhoto, matching: .images, label: {
-                    Image(systemName: "photo.circle.fill")
-                })
-            }
-            if homeStore.todayDailySnap == nil {
-                Text("Go Snap Your Mood!")
-                SceneView(scene: SCNScene(named: "Fox_Sit2_Idle.scn"), options: [.autoenablesDefaultLighting])
-                    .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height / 2)
+            if isProcessingImage == true {
+                ProgressView()
             } else {
-                Text("Your Mood is \(currentMood.rawValue)")
-                let todayDailySnap = homeStore.todayDailySnap!
-                SceneView(scene: SCNScene(named: EmotionScene.animation(emotion: currentMood)), options: [.autoenablesDefaultLighting])
-                    .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height / 2)
+                HStack(alignment: .center) {
+                    DatePicker(selection: $pickedDate, displayedComponents: .date, label: {
+                    })
+                    .frame(maxWidth: 100)
+                }.padding([.bottom], 16.0)
                 
-                ScrollView {
-                    ForEach(dailySnapItems, id: \.id) { snapItem in
-                        DailySnapItemRowView(dailySnapItem: snapItem)
-                            .onTapGesture {
-                                navigationPath.append(DetailDailySnapItemRoutingPath(snapItem: snapItem))
-                            }
+                if homeStore.todayDailySnap == nil {
+                    SceneView(scene: scnScene, options: [.autoenablesDefaultLighting])
+                        .frame(maxWidth: .infinity, maxHeight: 400)
+                        .padding([.horizontal], 15)
+                    
+                    Text("You Don't Have Snap Moments!")
+                        .font(.sfMonoBold(fontSize: 24.0))
+                        .padding([.bottom], 4.0)
+                    
+                    if pickedDate == Date.now {
+                        Text("Go Snap Your Mood!")
+                            .font(.sfMonoBold(fontSize: 18.0))
+                            .fontWeight(.bold)
                     }
+                    
+                    Spacer()
+                } else {
+                    Text("Your Mood is \(currentMood.rawValue)")
+                        .font(.sfMonoBold(fontSize: 18.0))
+                        .fontWeight(.bold)
+                    SceneView(scene: scnScene, options: [.autoenablesDefaultLighting])
+                        .frame(maxWidth: .infinity, maxHeight: 500)
+                        .padding([.horizontal], 15)
+                    
+                    ScrollView {
+                        ForEach(dailySnapItems, id: \.id) { snapItem in
+                            DailySnapItemRowView(dailySnapItem: snapItem)
+                                .onTapGesture {
+                                    navigationPath.append(DetailDailySnapItemRoutingPath(snapItem: snapItem))
+                                }
+                        }
+                    }.padding([.horizontal], 16.0)
                 }
-            }
-            if isProcessingImage {
-                Text("Image is loading, please wait...")
             }
         }
-        .onAppear {
-            Task {
-                
-                homeStore.todayDailySnap = homeStore.getTodayDailySnap()
-                if homeStore.todayDailySnap != nil {
-                    self.dailySnapItems = homeStore.getDailySnapItemsByDailySnap(dailySnap: homeStore.todayDailySnap!)
-                    self.currentMood = Emotion.init(rawValue: homeStore.todayDailySnap!.latest_mood!).unsafelyUnwrapped
+        .safeAreaInset(edge: VerticalEdge.bottom, alignment: .center) {
+            if isProcessingImage == true {
+                EmptyView()
+            } else {
+                HStack(alignment: .center, spacing: 0) {
+                    Spacer()
+                    PhotosPicker(selection: $selectedPhoto, matching: .images, label: {
+                        Image(systemName: "photo.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                    })
+                    Button {
+                        isShowingCamera = true
+                    } label: {
+                        Image(systemName: "camera.circle.fill")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .foregroundColor(.primaryColor)
+                            .padding([.horizontal], 32.0)
+                    }
+                    Spacer()
                 }
+                .background(Color.whiteIvory)
             }
+        }
+        .sheet(isPresented: $isShowingCamera, content: {
+            CameraView(capturedImage: $capturedImage)
+        })
+        .onChange(of: capturedImage, perform: { _ in
+            Task {
+                await processCapturedPhoto()
+            }
+        })
+        .onAppear {
+            handleDailySnapData()
         }
         .onChange(of: selectedPhoto, perform: { _ in
             Task {
@@ -78,13 +116,7 @@ struct HomeView: View {
             }
         })
         .onChange(of: pickedDate, perform: { _ in
-            Task {
-                homeStore.todayDailySnap = homeStore.getDailySnapByDate(filterDate: pickedDate.formatted(date: .numeric, time: .omitted))
-                if homeStore.todayDailySnap != nil {
-                    self.dailySnapItems = homeStore.getDailySnapItemsByDailySnap(dailySnap: homeStore.todayDailySnap!)
-                    self.currentMood = Emotion.init(rawValue: homeStore.todayDailySnap!.latest_mood!).unsafelyUnwrapped
-                }
-            }
+            handleDailySnapData()
         })
         .alert("Photo Error", isPresented: $isShowingImageAlert, actions: {
             Button("Ok", role: .cancel) {  }
@@ -106,13 +138,32 @@ struct HomeView: View {
         })
     }
     
+    func handleDailySnapData() {
+        if pickedDate == Date.now {
+            self.scnScene = SCNScene(named: "Fox_Sit2_Idle.scn")!
+            homeStore.todayDailySnap = homeStore.getTodayDailySnap()
+            if homeStore.todayDailySnap != nil {
+                self.dailySnapItems = homeStore.getDailySnapItemsByDailySnap(dailySnap: homeStore.todayDailySnap!)
+                self.currentMood = Emotion.init(rawValue: homeStore.todayDailySnap!.latest_mood!).unsafelyUnwrapped
+                self.scnScene = SCNScene(named: EmotionScene.animation(emotion: currentMood))!
+            }
+        } else {
+            homeStore.todayDailySnap = homeStore.getDailySnapByDate(filterDate: pickedDate.formatted(date: .numeric, time: .omitted))
+            if homeStore.todayDailySnap != nil {
+                self.dailySnapItems = homeStore.getDailySnapItemsByDailySnap(dailySnap: homeStore.todayDailySnap!)
+                self.currentMood = Emotion.init(rawValue: homeStore.todayDailySnap!.latest_mood!).unsafelyUnwrapped
+                self.scnScene = SCNScene(named: EmotionScene.animation(emotion: currentMood))!
+            } else {
+                self.scnScene = SCNScene(named: "Fox_Sit2_Idle.scn")!
+            }
+        }
+    }
+    
     func processPickerPhoto() async {
+        print("START PROCESSING IMAGE")
         isProcessingImage = true
         if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
-            
             if let selectedPhoto = UIImage(data: data) {
-                print("Image Loaded")
-                
                 FaceDetectionUtil.detectFace(image: selectedPhoto) { croppedFacePhoto in
                     if let croppedFacePhoto = croppedFacePhoto {
                         selectedOriginalPhoto = selectedPhoto
@@ -123,11 +174,23 @@ struct HomeView: View {
                     }
                 }
             }
-            print("Finish Detecting Image")
-            isProcessingImage = false
         }
     }
     
+    func processCapturedPhoto() async {
+        isProcessingImage = true
+        if let capturedImage = capturedImage {
+            FaceDetectionUtil.detectFace(image: capturedImage) { croppedFacePhoto in
+                if let croppedFacePhoto = croppedFacePhoto {
+                    selectedOriginalPhoto = capturedImage
+                    croppedOriginalPhoto = croppedFacePhoto
+                    navigationPath.append(AnalyzedImageViewRoutingPath())
+                } else {
+                    isShowingImageAlert = true
+                }
+            }
+        }
+    }
 }
 
 struct HomeView_Previews: PreviewProvider {

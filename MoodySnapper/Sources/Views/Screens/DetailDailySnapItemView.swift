@@ -14,7 +14,7 @@ struct DetailDailySnapItemView: View {
         VStack {
             ZStack {
                 // Background
-                Color.white
+                Color.whiteIvory
                 
                 ZStack {
                     // Masking tape
@@ -43,12 +43,12 @@ struct DetailDailySnapItemView: View {
                         Spacer()
                         
                         Group {
-                            Text("You had a \(dailySnapItem.mood_status!) moment")
+                            Text("You had a \(dailySnapItem.mood_status!.lowercased()) moment")
                                 .font(.title2)
                                 .fontWeight(.bold)
                                 .padding([.bottom], 8.0)
                             
-                            Text("Test\(dailySnapItem.snap_moment!)")
+                            Text("Your moment was \(dailySnapItem.snap_moment!)")
                                 .font(.body)
                         }.padding([.horizontal], 32.0)
                         
@@ -65,7 +65,11 @@ struct DetailDailySnapItemView: View {
             .frame(maxHeight: UIScreen.main.bounds.height / 1.5)
             .shadow(color: Color.gray, radius: 5, x: 0, y: 2)
             .padding([.horizontal], 16.0)
-        }
+            
+            Spacer()
+        }.background(Color.whiteIvory)
+        
+        
     }
     
     private func loadImageFromDocumentDirectory() {
