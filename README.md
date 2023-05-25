@@ -6,16 +6,13 @@ MoodySnapper is an app that captures users' facial expressions, analyzes their m
 ## Images
 <!-- ![Screenshot of the main screen](/Resources/Views/1.%20Main%20View.jpg) ![Screenshot of the photo picker screen](/Resources/Views/2.%20Photo%20Picker%20View.jpg)    -->
 
-<p align="center">
-      <img src="https://raw.githubusercontent.com/Dzulfikar-git/moody-snapper/main/Resources/Views/1.%20Main%20View.jpg" align="left" width="300">
+<p align="left">
+      <img src="https://raw.githubusercontent.com/Dzulfikar-git/moody-snapper/main/Resources/Views/1.%20Main%20View.jpg" width="300">
       <img src="https://raw.githubusercontent.com/Dzulfikar-git/moody-snapper/main/Resources/Views/2.%20Photo%20Picker%20View.jpg" width="300">
-      <img src="https://raw.githubusercontent.com/Dzulfikar-git/moody-snapper/main/Resources/Views/3.%20Analyzed%20Image.jpg" width="300"  align="right">
-</p>
-
-<p align="center">
-      <img src="https://raw.githubusercontent.com/Dzulfikar-git/moody-snapper/main/Resources/Views/4.%20Change%20Mood%20View.jpg" align="left" width="300">
+      <img src="https://raw.githubusercontent.com/Dzulfikar-git/moody-snapper/main/Resources/Views/3.%20Analyzed%20Image.jpg" width="300">
+      <img src="https://raw.githubusercontent.com/Dzulfikar-git/moody-snapper/main/Resources/Views/4.%20Change%20Mood%20View.jpg" width="300">
       <img src="https://raw.githubusercontent.com/Dzulfikar-git/moody-snapper/main/Resources/Views/5.%20Save%20Moment%20View.jpg" width="300">
-      <img src="https://raw.githubusercontent.com/Dzulfikar-git/moody-snapper/main/Resources/Views/6.%20Finish%20Save%20Moment.jpg" width="300"  align="right">
+      <img src="https://raw.githubusercontent.com/Dzulfikar-git/moody-snapper/main/Resources/Views/6.%20Finish%20Save%20Moment.jpg" width="300">
 </p>
 
 ## Technologies
